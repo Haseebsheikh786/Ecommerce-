@@ -12,15 +12,20 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const app = express();
 const { User } = require("./models/User");
-const {  sanitizeUser, cookieExtractor } = require("./services/common");
+const { sanitizeUser, cookieExtractor } = require("./services/common");
 const SECRET_KEY = "SECRET_KEY";
+const morgan = require("morgan");
+
+const path = require("path");
+
 const cookieParser = require("cookie-parser");
 // JWT options
 const opts = {};
 opts.jwtFromRequest = cookieExtractor;
-opts.secretOrKey = SECRET_KEY; // TODO: should not be in code;  
+opts.secretOrKey = SECRET_KEY; // TODO: should not be in code;
+app.use(morgan("default"));
 
-app.use(express.static("build"));
+app.use(express.static(path.resolve(__dirname, "build")));
 app.use(cookieParser());
 
 app.use(
@@ -40,8 +45,13 @@ app.use(
 );
 
 app.use(express.json());
-
-app.use(router);
+app.use("/auth", require("./routes/AuthRoute"));
+app.use("/products", require("./routes/ProductRoute"));
+app.use("/brands", require("./routes/BrandRoute"));
+app.use("/categories", require("./routes/CategoryRoute"));
+app.use("/cart", require("./routes/CartRoute"));
+app.use("/orders", require("./routes/OrderRoute"));
+app.use("/users", require("./routes/UserRoute"));
 
 // Passport Strategies
 passport.use(
@@ -67,9 +77,9 @@ passport.use(
         async function (err, hashedPassword) {
           if (!crypto.timingSafeEqual(user.password, hashedPassword)) {
             return done(null, false, { message: "invalid credentials" });
-          } 
+          }
           const token = jwt.sign(sanitizeUser(user), SECRET_KEY);
-          done(null, {id:user.id, role:user.role,token:token}); // this lines sends to serializer
+          done(null, { id: user.id, role: user.role, token: token }); // this lines sends to serializer
         }
       );
     } catch (err) {
@@ -86,7 +96,7 @@ passport.use(
       if (user) {
         return done(null, sanitizeUser(user)); // this calls serializer
       } else {
-        return done(null, false); 
+        return done(null, false);
       }
     } catch (err) {
       return done(err, false);

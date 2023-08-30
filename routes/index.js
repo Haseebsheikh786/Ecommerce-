@@ -26,7 +26,7 @@ const {
 
 const {
   addToCart,
-  fetchCartByUser,
+  fetchCartByUser, 
   deleteFromCart,
   updateCart,
 } = require("../controller/CartController");

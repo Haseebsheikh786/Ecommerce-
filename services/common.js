@@ -11,22 +11,22 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-exports.isAuth = () => { 
+exports.isAuth = () => {
   return passport.authenticate("jwt");
 };
-  
+
 exports.sanitizeUser = (user) => {
   return { id: user.id, role: user.role };
 };
 
 exports.cookieExtractor = function (req) {
   let token = null;
-  if (req && req.cookies) { 
+  if (req && req.cookies) {
     token = req.cookies["jwt"];
   }
   //TODO : this is temporary token for testing without cookie
   // token =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTllNDIzMjFjYTY5OGQwNzA2YjY4ZiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkzNDExODM3fQ.M3DRN-tPNakDbwmMns48gNw9TYNnaWgjXetuvCgpmKU";
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWY4M2JmMmIyZmYyMTNiNmI5OGMxNiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkzNDE4NDMxfQ.2RyHJyuaRqKZ3ry6J8sXzvwIfp9Rn0gmBTO2YAyGeaU";
   return token;
 };
 
@@ -150,15 +150,6 @@ exports.invoiceTemplate = function (order) {
          <tr>
          <td align="center" valign="top" width="600">
          <![endif]-->
-         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-           <tr>
-             <td align="center" valign="top" style="padding: 36px 24px;">
-               <a href="https://sendgrid.com" target="_blank" style="display: inline-block;">
-                 <img src="./img/paste-logo-light@2x.png" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
-               </a>
-             </td>
-           </tr>
-         </table>
          <!--[if (gte mso 9)|(IE)]>
          </td>
          </tr>

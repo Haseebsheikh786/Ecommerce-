@@ -1,91 +1,92 @@
-// const express = require("express");
-// const passport = require("passport");
 
-// const {
-//   createProduct,
-//   fetchAllProducts,
-//   fetchProductById,
-//   updateProduct,
-// } = require("../controller/ProductController");
+const express = require("express");
+const passport = require("passport");
 
-// const { fetchBrands, createBrand } = require("../controller/BrandController");
+const {
+  createProduct,
+  fetchAllProducts,
+  fetchProductById,
+  updateProduct,
+} = require("../controller/ProductController");
 
-// const {
-//   fetchCategories,
-//   createCategory,
-// } = require("../controller/CategoryController");
+const { fetchBrands, createBrand } = require("../controller/BrandController");
 
-// const {
-//   createUser,
-//   loginUser,
-//   checkAuth,
-//   resetPassword,
-//   resetPasswordRequest,
-//   logout,
-// } = require("../controller/AuthController");
+const {
+  fetchCategories,
+  createCategory,
+} = require("../controller/CategoryController");
 
-// const {
-//   addToCart,
-//   fetchCartByUser, 
-//   deleteFromCart,
-//   updateCart,
-// } = require("../controller/CartController");
+const {
+  createUser,
+  loginUser,
+  checkAuth,
+  resetPassword,
+  resetPasswordRequest,
+  logout,
+} = require("../controller/AuthController");
 
-// const {
-//   createOrder,
-//   fetchOrdersByUser,
-//   deleteOrder,
-//   updateOrder,
-//   fetchAllOrders,
-// } = require("../controller/OrderController");
+const {
+  addToCart,
+  fetchCartByUser, 
+  deleteFromCart,
+  updateCart,
+} = require("../controller/CartController");
 
-// const { fetchUserById, updateUser } = require("../controller/UserController");
+const {
+  createOrder,
+  fetchOrdersByUser,
+  deleteOrder,
+  updateOrder,
+  fetchAllOrders,
+} = require("../controller/OrderController");
 
-// const { isAuth } = require("../services/common");
+const { fetchUserById, updateUser } = require("../controller/UserController");
 
-// const router = express.Router();
+const { isAuth } = require("../services/common");
 
-// // Product
+const router = express.Router();
 
-// router
-//   .post("/products", isAuth(), createProduct)
-//   .get("/products", fetchAllProducts)
-//   .get("/products/:id", isAuth(), fetchProductById)
-//   .patch("/products/:id", isAuth(), updateProduct);
+// Product
 
-// // Brand
-// router.get("/brands", fetchBrands).post("/brands", createBrand);
+router
+  .post("/products", isAuth(), createProduct)
+  .get("/products", fetchAllProducts)
+  .get("/products/:id", isAuth(), fetchProductById)
+  .patch("/products/:id", isAuth(), updateProduct);
 
-// // Category
-// router.get("/categories", fetchCategories).post("/categories", createCategory);
+// Brand
+router.get("/brands", fetchBrands).post("/brands", createBrand);
 
-// // Auth
-// router
-//   .post("/auth/signup", createUser)
-//   .post("/auth/login", passport.authenticate("local"), loginUser)
-//   .get("/auth/logout", logout)
-//   .get("/auth/check", isAuth(), checkAuth)
-//   .post("/auth/reset-password-request", resetPasswordRequest)
-//   .post("/auth/reset-password", resetPassword);
+// Category
+router.get("/categories", fetchCategories).post("/categories", createCategory);
 
-// // User
-// router
-//   .get("/users/own", isAuth(), fetchUserById)
-//   .patch("/users/:id", isAuth(), updateUser);
+// Auth
+router
+  .post("/auth/signup", createUser)
+  .post("/auth/login", passport.authenticate("local"), loginUser)
+  .get("/auth/logout", logout)
+  .get("/auth/check", isAuth(), checkAuth)
+  .post("/auth/reset-password-request", resetPasswordRequest)
+  .post("/auth/reset-password", resetPassword);
 
-// // Cart
-// router
-//   .post("/cart/", isAuth(), addToCart)
-//   .get("/cart/", isAuth(), fetchCartByUser)
-//   .delete("/cart/:id", isAuth(), deleteFromCart)
-//   .patch("/cart/:id", isAuth(), updateCart);
+// User
+router
+  .get("/users/own", isAuth(), fetchUserById)
+  .patch("/users/:id", isAuth(), updateUser);
 
-// // Order
-// router
-//   .post("/orders/", isAuth(), createOrder)
-//   .get("/orders/own", isAuth(), fetchOrdersByUser)
-//   .delete("/orders/:id", isAuth(), deleteOrder)
-//   .patch("/orders/:id", isAuth(), updateOrder)
-//   .get("/orders", isAuth(), fetchAllOrders);
+// Cart
+router
+  .post("/cart/", isAuth(), addToCart)
+  .get("/cart/", isAuth(), fetchCartByUser)
+  .delete("/cart/:id", isAuth(), deleteFromCart)
+  .patch("/cart/:id", isAuth(), updateCart);
 
-// module.exports = router;
+// Order
+router
+  .post("/orders/", isAuth(), createOrder)
+  .get("/orders/own", isAuth(), fetchOrdersByUser)
+  .delete("/orders/:id", isAuth(), deleteOrder)
+  .patch("/orders/:id", isAuth(), updateOrder)
+  .get("/orders", isAuth(), fetchAllOrders);
+
+module.exports = router;

@@ -11,7 +11,7 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-exports.isAuth = () => {
+exports.isAuth = () => { 
   return passport.authenticate("jwt");
 };
   
@@ -26,7 +26,7 @@ exports.cookieExtractor = function (req) {
   }
   //TODO : this is temporary token for testing without cookie
   // token =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTllNDIzMjFjYTY5OGQwNzA2YjY4ZiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkzMzkyNzQ0fQ.7BxKuSEfAbUaacNTgQVVb2sILaYnzPaXR1KunE7SUXg";
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTllNDIzMjFjYTY5OGQwNzA2YjY4ZiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkzNDExODM3fQ.M3DRN-tPNakDbwmMns48gNw9TYNnaWgjXetuvCgpmKU";
   return token;
 };
 
